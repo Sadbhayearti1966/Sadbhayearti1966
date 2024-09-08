@@ -1,0 +1,322 @@
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 8.4.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    ->
+    -> show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show databases' at line 3
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> create databases sepdb;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databases sepdb' at line 1
+mysql> create database sepdb;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> use sepdb;
+Database changed
+mysql> create table dept(deptid int,dname varchar,managerid int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',managerid int)' at line 1
+mysql> create table dept(deptid int,dname varchar(20),managerid int);
+Query OK, 0 rows affected (0.29 sec)
+
+mysql>
+mysql>
+mysql>
+mysql> desc dept;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| deptid    | int         | YES  |     | NULL    |       |
+| dname     | varchar(20) | YES  |     | NULL    |       |
+| managerid | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql>
+mysql>
+mysql>  create table emp(empid int,ename varchar(10),salary int,address varchar (10), managerid int);
+Query OK, 0 rows affected (0.31 sec)
+
+mysql> desc emp
+    -> desc emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc emp' at line 2
+mysql>
+mysql>
+mysql> desc emp;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| empid     | int         | YES  |     | NULL    |       |
+| ename     | varchar(10) | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| address   | varchar(10) | YES  |     | NULL    |       |
+| managerid | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+mysql>
+mysql>
+mysql> alter table dept add constraint primary key (deptid);
+Query OK, 0 rows affected (0.76 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  alter table dept add constraint primary key (empid);
+ERROR 1068 (42000): Multiple primary key defined
+mysql>
+mysql>
+mysql>  alter table emp add constraint primary key (deptid);
+ERROR 1072 (42000): Key column 'deptid' doesn't exist in table
+mysql>
+mysql>
+mysql>
+mysql> alter table emp add constraint primary key(empid);
+Query OK, 0 rows affected (0.84 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql> desc emp;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| empid     | int         | NO   | PRI | NULL    |       |
+| ename     | varchar(10) | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| address   | varchar(10) | YES  |     | NULL    |       |
+| managerid | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table emp add column(deptid int)
+    ->
+    ->
+    -> alter table emp add column (deptid int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alter table emp add column (deptid int)' at line 4
+mysql>
+mysql>
+mysql> ;
+ERROR:
+No query specified
+
+mysql>  alter table emp add column (deptid int);
+Query OK, 0 rows affected (0.29 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  desc emp;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| empid     | int         | NO   | PRI | NULL    |       |
+| ename     | varchar(10) | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| address   | varchar(10) | YES  |     | NULL    |       |
+| managerid | int         | YES  |     | NULL    |       |
+| deptid    | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table emp add constraint  fkemp foreign key (deptid) references (deptid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(deptid))' at line 1
+mysql>
+mysql>
+mysql>
+mysql>  alter table emp add constraint  fkemp foreign key (deptid) references (deptid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(deptid)' at line 1
+mysql>
+mysql>
+mysql>
+mysql> alter table emp add constraint  fkemp foreign key(deptid) references (deptid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(deptid)' at line 1
+mysql>
+mysql>
+mysql>  alter table emp add constraint  fkemp foreign key(deptid) references dept(deptid);
+Query OK, 0 rows affected (1.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+    ->
+    -> insert into dept values(10,'Accounting',101);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql>
+mysql> select   * from dept;
++--------+------------+-----------+
+| deptid | dname      | managerid |
++--------+------------+-----------+
+|     10 | Accounting |       101 |
++--------+------------+-----------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql>
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql>
+mysql> select * from dept;
++--------+------------+-----------+
+| deptid | dname      | managerid |
++--------+------------+-----------+
+|     10 | Accounting |       101 |
++--------+------------+-----------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql>
+mysql>
+mysql> set autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql>
+mysql> insert into dept values (10,'Accounting',101);
+ERROR 1062 (23000): Duplicate entry '10' for key 'dept.PRIMARY'
+mysql>
+mysql>
+mysql>
+mysql> insert into dept values(20,'HR',101);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into dept values(30,'IT operation',102);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> insert into dept values(40,'Medical dept ',103);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc emp;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| empid     | int         | NO   | PRI | NULL    |       |
+| ename     | varchar(10) | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| address   | varchar(10) | YES  |     | NULL    |       |
+| managerid | int         | YES  |     | NULL    |       |
+| deptid    | int         | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> insert into dept values(101,'king',50000', 'Mumbai',Null,Null);
+    '> insert into dept values(20,'HR',101);
+    '>
+    '>
+    '>
+    '> insert into  emp values(101,'king',50000', 'Mumbai',
+,Null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '', 'Mumbai',Null,Null);
+insert into dept values(20,'HR',101);
+
+
+
+insert into  em' at line 1
+mysql>
+mysql>  insert into  emp values(101,'king',50000, 'Mumbai',Null,Null);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into  emp values(102 insert into  emp values(101,'king',50000', 'Mumbai',Null,Nul,kocchar',40000', 'Mumbai',Null,Null);
+    '>
+    '>
+    '>
+    '> insert into  emp values(102 insert into  emp values(102,'koacchar',450000', 'Mi',Null,Nul,kocchar',40000', 'Mumbai',Null,N
+    ->
+    ->
+    ->
+    ->  insert into  emp values(102,45000, 'kocchar',Null,Null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into  emp values(101,'king',50000', 'Mumbai',Null,Nul,kocchar',40000', 'M' at line 1
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>     ->  insert into  emp values(102,'lion',45000, 'kocchar',Null,10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->  insert into  emp values(102,'lion',45000, 'kocchar',Null,10)' at line 1
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> mysql>     ->  insert into  emp values(103,'dog',55000, 'pune',120,10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql>     ->  insert into  emp values(103,'dog',55000, 'pune',120,10)' at line 1
+mysql>
+mysql> mysql>     ->  insert into  emp values(103,'pig',65000,'nepal',120,10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql>     ->  insert into  emp values(103,'pig',65000,'nepal',120,10)' at line 1
+mysql>
+mysql>
+mysql>
+mysql>  auto commit =0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'auto commit =0' at line 1
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> set autocommit=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from table
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table' at line 1
+mysql> insert into dept values(20,'HR',101);
+ERROR 1062 (23000): Duplicate entry '20' for key 'dept.PRIMARY'
+mysql>
+mysql> mysql>     ->  show table
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql>     ->  show table' at line 1
+mysql> show tables;
++-----------------+
+| Tables_in_sepdb |
++-----------------+
+| dept            |
+| emp             |
++-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from emp;
++-------+-------+--------+---------+-----------+--------+
+| empid | ename | salary | address | managerid | deptid |
++-------+-------+--------+---------+-----------+--------+
+|   101 | king  |  50000 | Mumbai  |      NULL |   NULL |
++-------+-------+--------+---------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql>
